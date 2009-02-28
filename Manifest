@@ -1,8 +1,10 @@
+bin/bind
 History.rdoc
 lib/bind/actions.rb
 lib/bind/events.rb
 lib/bind/version.rb
 lib/bind.rb
+Manifest
 Rakefile
 README.rdoc
 spec/bind_spec.rb
@@ -11,4 +13,3 @@ tasks/docs.rake
 tasks/gemspec.rake
 tasks/spec.rake
 Todo.rdoc
-Manifest
