@@ -8,15 +8,17 @@ program :name, 'Bind'
 program :version, Bind::VERSION::STRING
 program :description, 'Bind actions to filesystem events'
  
-command :change do |c|
-  c.syntax = 'bind change <dir> | <file> [options] '
+command :to do |c|
+  c.syntax = 'bind to <file> [file ...] [options] '
   c.summary = 'Bind to modification of a file'
-  c.description = 'Bind to modification of a <file>, or all files within <dir>'
-  c.example 'Bind to a single file, logging its name when changed', "bind change foo.css -e 'puts file'"
+  c.description = 'Bind to modification of a file or all files within a directory.'
+  c.example 'Bind to a single file, logging its path when changed', "bind change foo.css -e 'puts file'"
+  c.example 'Refresh a browser to the specific uri when altered, twice per second', "bind to style.css -s 'open -a -g Safari /uri/to/refresh' -i 500"
   c.option '-r', '--require', 'Require a ruby library.'
   c.option '-e', '--eval', 'Evaluate a string of Ruby in context of Bind, so the file local variable is available.'
+  c.option '-s', '--shell', 'Evaluate a string of shell script with the file passed as an argument.'
   c.option '-i', '--interval', 'Interval in milliseconds in which to listen for an event.'
-  c.option '-I', '--interval-sec', 'Interval in seconds in which to listen for an event.'
+  c.option '-I', '--interval-sec', 'Interval in seconds in which to listen for an event. Defaults to 1 second'
   c.option '-t', '--timeout', 'Timeout after n seconds.'
   c.when_called do |args, options|
     
