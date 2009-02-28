@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'commander'
+require 'bind'
+
+program :name, 'Bind'
+program :version, Bind::VERSION::STRING
+program :description, 'Bind actions to filesystem events'
+ 
+command :change do |c|
+  c.syntax = 'bind change <dir> | <file> [options] '
+  c.description = 'Bind to modification of a <file>, or all files within <dir>'
+  c.example 'Bind to a single file, logging its name when changed', "bind change foo.css -e 'puts file'"
+  c.option '--some-switch', 'Some switch that does something'
+  c.when_called do |args, options|
+    
+  end
+end
+
