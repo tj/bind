@@ -10,9 +10,14 @@ program :description, 'Bind actions to filesystem events'
  
 command :change do |c|
   c.syntax = 'bind change <dir> | <file> [options] '
+  c.summary = 'Bind to modification of a file'
   c.description = 'Bind to modification of a <file>, or all files within <dir>'
   c.example 'Bind to a single file, logging its name when changed', "bind change foo.css -e 'puts file'"
-  c.option '--some-switch', 'Some switch that does something'
+  c.option '-r', '--require', 'Require a ruby library.'
+  c.option '-e', '--eval', 'Evaluate a string of Ruby in context of Bind, so the file local variable is available.'
+  c.option '-i', '--interval', 'Interval in milliseconds in which to listen for an event.'
+  c.option '-I', '--interval-sec', 'Interval in seconds in which to listen for an event.'
+  c.option '-t', '--timeout', 'Timeout after n seconds.'
   c.when_called do |args, options|
     
   end
