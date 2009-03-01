@@ -24,5 +24,7 @@
 $:.unshift File.dirname(__FILE__)
 
 require 'bind/version'
+require 'bind/listener'
+require 'bind/action'
 require 'bind/events'
 require 'bind/actions'
