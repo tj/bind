@@ -26,15 +26,17 @@ module Bind
    #
     
    def initialize options = {}
-     raise ArgumentError, 'specify one or more :files (or dirs) to bind actions to' unless options[:files].respond_to? :to_ary
-     raise ArgumentError, 'pass a valid :action, must respodn to #call' unless options[:action].respond_to? :call
      @run_time, @mtimes = 0, {}
-     @files = options.delete :files
-     @action = options.delete :action
-     @log = options.delete(:log) || false
-     @timeout = options.delete(:timeout) || 0
-     @interval = options.delete(:interval) || 2
-     @event = options.delete(:event) || :change
+     @files = options.fetch :files do
+      raise ArgumentError, 'specify one or more :files (or directories) to bind the listener to'
+     end
+     @action = options.fetch :action do
+       raise ArgumentError, 'pass a valid :action responding to #call'
+     end
+     @log = options.fetch :log, false
+     @timeout = options.fetch :timeout, 0
+     @interval = options.fetch :interval, 2
+     @event = options.fetch :event, :change
    end
    
    ##
@@ -42,18 +44,20 @@ module Bind
    
    def run!
      start_time = Time.now
-     log "start #{start_time} " + self.inspect
+     log "binding to #{files.join(', ')}, watching #{event} every #{interval} second(s)." + 
+         (timeout > 0 ? " Terminating in #{timeout} seconds" : '')
      catch :halt do
        loop do
          @run_time = Time.now - start_time
          throw :halt if timeout > 0 and @run_time >= timeout
-         log '.'
+         @log.print '.'
+         @log.flush
          files.each { |file| send event, File.new(file) } 
          sleep interval
        end
      end
      finish_time = Time.now
-     log "end #{finish_time}"
+     log "binding terminated"
    end
    
    private

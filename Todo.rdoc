@@ -6,7 +6,7 @@
 == Minor:
 
 * Support action / event pairs, n to n
-* Add more actions / events
+* Add more actions / events like atime
 * Add bind dsl
   bind.
     to('style.css', 'styles').
