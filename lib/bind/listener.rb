@@ -26,7 +26,6 @@ module Bind
     
    def initialize options = {}
      raise ArgumentError, 'specify one or more :files (or dirs) to bind actions to' unless options[:files].respond_to? :to_ary
-     raise ArgumentError, "the event '#{options[:event]} is not supported" unless respond_to? options[:event]
      raise ArgumentError, 'pass a valid :action, must respodn to #call' unless options[:action].respond_to? :call
      @run_time, @mtimes = 0, {}
      @options = {
@@ -41,20 +40,18 @@ module Bind
    
    def run!
      start_time = Time.now
-     log 'Started listener: ' + self.inspect
-     catch :timeout do
+     log "start #{start_time} " + self.inspect
+     catch :halt do
        loop do
-         if options[:timeout] > 0
-           run_time = Time.now - start_time
-           throw :timeout if run_time >= options[:timeout]
-         end
-         options[:files].each do |file|
-           send options[:event], file
-         end
+         @run_time = Time.now - start_time
+         throw :halt if options[:timeout] > 0 and @run_time >= options[:timeout]
+         log '.'
+         options[:files].each { |file| send options[:event], File.new(file) } 
          sleep options[:interval]
        end
      end
      finish_time = Time.now
+     log "end #{finish_time}"
    end
    
    private
@@ -64,7 +61,9 @@ module Bind
    
    def change file
      if changed? file
+       log "changed #{file.path}"
        options[:action].call file
+       @mtimes[file.path] = file.mtime
      end
    end
    
@@ -72,8 +71,7 @@ module Bind
    # Check if +file+ has been modified since the last check.
    
    def changed? file
-     last_modified = File.mtime file
-     last_modified > (@mtimes[file] ||= last_modified)
+     file.mtime > (@mtimes[file.path] ||= file.mtime)
    end
    
    ##
