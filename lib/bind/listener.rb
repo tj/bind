@@ -48,7 +48,9 @@ module Bind
            run_time = Time.now - start_time
            throw :timeout if run_time >= options[:timeout]
          end
-         send options[:event]
+         options[:files].each do |file|
+           send options[:event], file
+         end
          sleep options[:interval]
        end
      end
@@ -57,14 +59,17 @@ module Bind
    
    private
    
-   def change
-     # TODO: expand dirs
-     options[:files].each do |file|
-       if changed? file
-         options[:action].call file
-       end
+   ##
+   # Handle change event.
+   
+   def change file
+     if changed? file
+       options[:action].call file
      end
    end
+   
+   ##
+   # Check if +file+ has been modified since the last check.
    
    def changed? file
      last_modified = File.mtime file
