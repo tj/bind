@@ -1,7 +1,7 @@
 
 = Bind
 
-Bind actions to verious file system events, helping aid in
+Bind actions to various file system events, helping aid in
 automation of tasks such as refreshing browser(s) when you
 update a css / sass / js file.
 

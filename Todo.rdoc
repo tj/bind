@@ -1,7 +1,8 @@
 
 == Major:
 
-* Nothing
+* Fix --eval switch
+* Add browser refreshing command to bind 
 
 == Minor:
 
