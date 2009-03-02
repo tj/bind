@@ -1,9 +1,13 @@
 
 = Bind
 
-  Bind actions to verious file system events, helping aid in
-  automation of tasks such as refreshing browser(s) when you
-  update a css / sass / js file.
+Bind actions to verious file system events, helping aid in
+automation of tasks such as refreshing browser(s) when you
+update a css / sass / js file.
+
+== Features
+
+* Coming soon
 
 == License:
 
