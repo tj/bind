@@ -83,13 +83,3 @@ module Bind
    
   end
 end
-
-__END__
-bind.
-   to('style.css', 'styles').
-   on('change', lambda { |file| exec 'open -a -g Safari /uri/to/refresh' }).
-   wait(1.second).
-   timeout_after(5.seconds).
-   log_to($stdout)
-action  = lambda { ... }
-binding = Bind::Listener.new :event => :change, :files => ['style.css', 'styles'], :action => action, :timeout => 5.seconds, :log => $stdout, :interval => 1.second

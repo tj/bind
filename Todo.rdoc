@@ -5,7 +5,15 @@
 
 == Minor:
 
-* Nothing
+* Support action / event pairs, n to n
+* Add more actions / events
+* Add bind dsl
+  bind.
+    to('style.css', 'styles').
+    on('change', lambda { |file| exec 'open -a -g Safari /uri/to/refresh' }).
+    wait(1.second).
+    timeout_after(5.seconds).
+    log_to($stdout)
 
 == Brainstorming:
 

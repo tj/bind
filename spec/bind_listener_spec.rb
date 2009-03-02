@@ -11,12 +11,4 @@ describe Bind::Listener do
     l.run_time.to_i.should == 2
   end
   
-  it "should call an action while iterating" do
-    count = 0
-    l = listener { count += 1 }
-    l.run!
-    File.touch File.dirname(__FILE__) + '/fixtures/style.css'
-    count.should == 2
-  end
-  
 end

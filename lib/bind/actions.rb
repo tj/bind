@@ -1,6 +1,6 @@
 
 module Bind
   module Actions
-    autoload :RefreshBrowser, 'bind/actions/refresh_browser'
+    autoload :RefreshBrowsers, 'bind/actions/refresh_browsers'
   end
 end
