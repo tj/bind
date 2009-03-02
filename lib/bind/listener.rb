@@ -42,7 +42,7 @@ module Bind
    def run!
      start_time = Time.now
      log 'Started listener: ' + self.inspect
-     catch :timeout
+     catch :timeout do
        loop do
          if options[:timeout] > 0
            run_time = Time.now - start_time
