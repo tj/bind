@@ -28,7 +28,7 @@ module Bind
      raise ArgumentError, 'specify one or more :files (or dirs) to bind actions to' unless options[:files].respond_to? :to_ary
      raise ArgumentError, "the event '#{options[:event]} is not supported" unless respond_to? options[:event]
      raise ArgumentError, 'pass a valid :action, must respodn to #call' unless options[:action].respond_to? :call
-     @run_time = 0
+     @run_time, @mtimes = 0, {}
      @options = {
        :timeout => 0,
        :interval => 2,
@@ -48,7 +48,7 @@ module Bind
            run_time = Time.now - start_time
            throw :timeout if run_time >= options[:timeout]
          end
-         send :"on_#{options[:event]}"
+         send options[:event]
          sleep options[:interval]
        end
      end
@@ -57,10 +57,18 @@ module Bind
    
    private
    
-   def on_change
-    # iterate files / expand dirs
-    # when modified since last time (have a hash table? )
-    # then invoke the action
+   def change
+     # TODO: expand dirs
+     options[:files].each do |file|
+       if changed? file
+         options[:action].call file
+       end
+     end
+   end
+   
+   def changed? file
+     last_modified = File.mtime file
+     last_modified > (@mtimes[file] ||= last_modified)
    end
    
    ##
