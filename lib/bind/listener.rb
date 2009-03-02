@@ -3,7 +3,8 @@
 module Bind
   class Listener
     
-   attr_reader :options, :run_time, :start_time, :finish_time
+   attr_accessor :files, :action, :timeout, :interval, :event
+   attr_reader :run_time, :start_time, :finish_time
   
    #--
    # Exceptions
@@ -28,11 +29,12 @@ module Bind
      raise ArgumentError, 'specify one or more :files (or dirs) to bind actions to' unless options[:files].respond_to? :to_ary
      raise ArgumentError, 'pass a valid :action, must respodn to #call' unless options[:action].respond_to? :call
      @run_time, @mtimes = 0, {}
-     @options = {
-       :timeout => 0,
-       :interval => 2,
-       :event => :change,
-     }.merge options   
+     @files = options.delete :files
+     @action = options.delete :action
+     @log = options.delete(:log) || false
+     @timeout = options.delete(:timeout) || 0
+     @interval = options.delete(:interval) || 2
+     @event = options.delete(:event) || :change
    end
    
    ##
@@ -44,10 +46,10 @@ module Bind
      catch :halt do
        loop do
          @run_time = Time.now - start_time
-         throw :halt if options[:timeout] > 0 and @run_time >= options[:timeout]
+         throw :halt if timeout > 0 and @run_time >= timeout
          log '.'
-         options[:files].each { |file| send options[:event], File.new(file) } 
-         sleep options[:interval]
+         files.each { |file| send event, File.new(file) } 
+         sleep interval
        end
      end
      finish_time = Time.now
@@ -62,7 +64,7 @@ module Bind
    def change file
      if changed? file
        log "changed #{file.path}"
-       options[:action].call file
+       action.call file
        @mtimes[file.path] = file.mtime
      end
    end
@@ -78,7 +80,7 @@ module Bind
    # Optionally log a +message+ when a stream has been specified.
    
    def log message
-     options[:log].puts message if options.include? :log 
+     @log.puts message if @log 
    end
    
   end
