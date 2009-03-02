@@ -13,14 +13,26 @@ command :to do |c|
   c.summary = 'Bind to modification of a file'
   c.description = 'Bind to modification of a file or all files within a directory.'
   c.example 'Bind to a single file, logging its path when changed', "bind change foo.css -e 'puts file'"
-  c.example 'Refresh a browser to the specific uri when altered, twice per second', "bind to style.css -s 'open -a -g Safari /uri/to/refresh' -i 500"
-  c.option '-r', '--require', 'Require a ruby library.'
-  c.option '-e', '--eval', 'Evaluate a string of Ruby in context of Bind, so the file local variable is available.'
-  c.option '-s', '--shell', 'Evaluate a string of shell script with the file passed as an argument.'
-  c.option '-i', '--interval', 'Interval in milliseconds in which to listen for an event.'
-  c.option '-I', '--interval-sec', 'Interval in seconds in which to listen for an event. Defaults to 1 second'
-  c.option '-t', '--timeout', 'Timeout after n seconds.'
+  c.example 'Refresh a browser to the specific uri when altered, twice per second', "bind to style.css -s 'open -a -g Safari /uri/to/refresh' -i 2"
+  c.option '-e', '--eval STRING', 'Evaluate a string of Ruby in context of Bind, so the file local variable is available.', String
+  c.option '-i', '--interval SECONDS', 'Interval in seconds in which to listen for an event.', Integer
+  c.option '-t', '--timeout SECONDS', 'Timeout after n seconds.', Integer
+  c.option '-r', '--require LIBS', 'Require ruby libraries.', Array
+  c.option '-V', '--verbose', 'Log information to STDOUT.'
   c.when_called do |args, options|
-    
+    # fix commander strings? ... --eval ' .... '
+    options.require.each { |lib| require lib } if options.require
+    options.log = $stdout if options.verbose
+    options.action = lambda { |file| eval options.eval } if options.eval
+    options.files = args
+    listener = Bind::Listener.new options_to_hash(options)
+    listener.run!
+  end
+end
+
+def options_to_hash options
+  options.singleton_methods.inject({}) do |hash, meth| 
+    hash[meth.to_sym] = options.send meth unless meth =~ /=$/
+    hash
   end
 end
