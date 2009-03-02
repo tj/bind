@@ -12,8 +12,7 @@ command :to do |c|
   c.syntax = 'bind to <file> [file ...] [options] '
   c.summary = 'Bind to modification of a file'
   c.description = 'Bind to modification of a file or all files within a directory.'
-  c.example 'Bind to a single file, logging its path when changed', "bind change foo.css -e 'puts file'"
-  c.example 'Refresh a browser to the specific uri when altered, twice per second', "bind to style.css -s 'open -a -g Safari /uri/to/refresh' -i 2"
+  c.example 'Bind to a single file, logging its path when changed', "bind change style.css -e 'puts file'"
   c.option '-e', '--eval STRING', 'Evaluate a string of Ruby in context of Bind, so the file local variable is available.', String
   c.option '-i', '--interval SECONDS', 'Interval in seconds in which to listen for an event.', Integer
   c.option '-t', '--timeout SECONDS', 'Timeout after n seconds.', Integer
