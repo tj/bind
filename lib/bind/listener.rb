@@ -50,8 +50,7 @@ module Bind
        loop do
          @run_time = Time.now - start_time
          throw :halt if timeout > 0 and @run_time >= timeout
-         @log.print '.'
-         @log.flush
+         log '.', true
          files.each { |file| send event, File.new(file) } 
          sleep interval
        end
@@ -83,8 +82,11 @@ module Bind
    ##
    # Optionally log a +message+ when a stream has been specified.
    
-   def log message
-     @log.puts message if @log 
+   def log message, print = false
+     if @log
+       print ? @log.print(message) : @log.puts(message)
+       @log.flush
+     end 
    end
    
   end
