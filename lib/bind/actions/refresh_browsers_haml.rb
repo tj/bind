@@ -29,11 +29,11 @@ module Bind
         opts.parse!
       end
       
-      def haml?
+      def haml? file
         file.path.include? '.haml'
       end
       
-      def sass?
+      def sass? file
         file.path.include? '.sass'
       end
       

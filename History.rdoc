@@ -1,4 +1,8 @@
 
+=== 0.0.8 / 2009-03-03
+
+* Fixed typo in RefreshBrowsersHaml
+
 === 0.0.6 / 2009-03-03
 
 * Fixed RefreshBrowsersHaml, forgot to add the file to the manifest :)
