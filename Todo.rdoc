@@ -1,7 +1,7 @@
 
 == Major:
 
-* Nothing
+* Add support for an eval BEFORE actions, such as building SASS / HAML
 
 == Minor:
 
