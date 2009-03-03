@@ -2,36 +2,49 @@
 
 require 'rubygems'
 #require 'bind'
+#require 'bind/command_helpers'
 require File.dirname(__FILE__) + '/../lib/bind'
+require File.dirname(__FILE__) + '/../lib/bind/command_helpers'
 require 'commander'
 
 program :name, 'Bind'
 program :version, Bind::VERSION::STRING
 program :description, 'Bind actions to filesystem events'
- 
+
 command :to do |c|
+  set_common_options c
   c.syntax = 'bind to <file> [file ...] [options] '
   c.summary = 'Bind to modification of a file'
   c.description = 'Bind to modification of a file or all files within a directory.'
   c.example 'Bind to a single file, logging its path when changed', "bind change style.css -e 'puts file'"
   c.option '-e', '--eval STRING', String, 'Evaluate a string of Ruby in context of Bind, so the file local variable is available.'
-  c.option '-i', '--interval SECONDS', Integer, 'Interval in seconds in which to listen for an event.'
-  c.option '-t', '--timeout SECONDS', Integer, 'Timeout after n seconds.'
-  c.option '-r', '--require LIBS', Array, 'Require ruby libraries.'
-  c.option '-V', '--verbose', 'Log information to STDOUT.'
   c.when_called do |args, options|
-    options.require.each { |lib| require lib } if options.require
-    options.debug = $stdout if options.verbose
-    options.action = lambda { |file| eval options.eval } if options.eval
+    populate_common_options options
+    if options.eval
+      options.action = lambda { |file| eval options.eval }
+    else
+      abort 'invalid option. --eval switch is required in order to perform any action on the bound file(s)'
+    end
     options.files = args
-    listener = Bind::Listener.new options_to_hash(options)
-    listener.run!
+    listener(options).run!
   end
 end
 
-def options_to_hash options
-  options.singleton_methods.inject({}) do |hash, meth| 
-    hash[meth.to_sym] = options.send meth unless meth =~ /=$/
-    hash
+command :refresh do |c|
+  set_common_options c
+  c.syntax = 'bind refresh <uri> [options]'
+  c.summary = 'Bind to <uri>, refreshing browsers.'
+  c.description = 'Bind to <uri>, refreshing browsers when the files you are watching change.'
+  c.example = 'Bind a few css files for quick editing in multiple browsers', 'bind refresh http://localhost/page --files style.css,reset.css --browsers Safari,Firefox'
+  c.example = 'Bind local static html (no scheme)', 'bind refresh examples/demo.html -f style.css -b Safari'
+  c.option '-b', '--browsers BROWSERS', Array, 'List of browsers you wish to refresh. Defaults to Safari'
+  c.option '-f', '--files FILES', Array, 'List of files to bind to.'
+  c.when_called do |args, options|
+    populate_common_options options
+    path = expand_path args.shift
+    browsers = options.browsers || ['Safari']
+    action = Bind::Actions::RefreshBrowsers.new path, *browsers
+    abort 'invalid option. --files switch is required in order to bind' if files.nil?
+    listener(options).run!
   end
 end
