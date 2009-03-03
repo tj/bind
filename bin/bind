@@ -1,10 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-#require 'bind'
-#require 'bind/command_helpers'
-require File.dirname(__FILE__) + '/../lib/bind'
-require File.dirname(__FILE__) + '/../lib/bind/command_helpers'
+require 'bind'
+require 'bind/command_helpers'
 require 'commander'
 
 program :name, 'Bind'
@@ -43,8 +41,8 @@ command :refresh do |c|
     populate_common_options options
     path = expand_path args.shift
     browsers = options.browsers || ['Safari']
-    action = Bind::Actions::RefreshBrowsers.new path, *browsers
-    abort 'invalid option. --files switch is required in order to bind' if files.nil?
+    options.action = Bind::Actions::RefreshBrowsers.new path, *browsers
+    abort 'invalid option. --files switch is required in order to bind' if options.files.nil?
     listener(options).run!
   end
 end

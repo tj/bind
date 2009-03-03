@@ -1,19 +1,12 @@
 
 == Major:
 
-* Add browser refreshing command to bind 
+* Nothing
 
 == Minor:
 
-* Support action / event pairs, n to n
+* Support action / event pairs, n to n, not 1 to 1
 * Add more actions / events like atime
-* Add bind dsl
-  bind.
-    to('style.css', 'styles').
-    on('change', lambda { |file| exec 'open -a -g Safari /uri/to/refresh' }).
-    wait(1.second).
-    timeout_after(5.seconds).
-    log_to($stdout)
 
 == Brainstorming:
 
