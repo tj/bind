@@ -1,4 +1,10 @@
 
+=== 0.0.9 / 2009-03-03
+	
+* Added RefreshBrowsersHaml example
+* Fixed RefreshBrowsersHaml.. ruby library for haml's exec was not working
+  just using shell for now.
+
 === 0.0.8 / 2009-03-03
 
 * Fixed typo in RefreshBrowsersHaml
