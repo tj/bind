@@ -10,7 +10,7 @@ module Bind
       attr_accessor :browsers, :uri
       
       def initialize uri, dest, *browsers
-        @uri, @dest, @browsers = uri, dest, browsers
+        @uri, @dest, @browsers = uri, File.expand_path(dest), browsers
       end
       
       def call file
@@ -20,13 +20,11 @@ module Bind
       end
       
       def build_haml file
-        opts = Haml::Exec::Haml.new [file.path, File.join(@dest, file.path)]
-        opts.parse!
+        `haml #{ file.path } #{ File.join(@dest, file.path.sub('.haml', '.html')) }`
       end
       
       def build_sass file
-        opts = Haml::Exec::Sass.new [file.path, File.join(@dest, file.path)]
-        opts.parse!
+        `sass #{ file.path } #{ File.join(@dest, file.path.sub('.sass', '.css')) }`
       end
       
       def haml? file
