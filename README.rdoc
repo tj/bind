@@ -5,9 +5,35 @@ Bind actions to various file system events, helping aid in
 automation of tasks such as refreshing browser(s) when you
 update a css / sass / js file.
 
-== Features
+== Executable
 
-* Coming soon
+The 'bind' executable allows you to perform arbitrary actions
+based on several events. Currently only the change (mtime) event
+is supported.
+
+Bind to a single file, outputting its path when changed
+  $ bind to style.css -e 'puts file.path'
+
+Refresh Safari, and Firefox in the background to the uri specified when 
+style.css or reset.css are modified.
+  $ bind refresh http://localhost/page --files style.css,reset.css --browsers Safari,Firefox
+
+Refresh local static html when the style you are working on is modified.
+  $ bind refresh examples/demo.html -f style.css -b Safari
+
+== Library
+
+Bind of course supplies a Ruby library as well, which provides the same 
+functionality as the executable above.
+
+
+Refresh Safari and Firefox, using the RefreshBrowsersHaml action, whenever a haml or
+sass file is modified, it will be compiled to '..' (up a directory) preceding the refresh.
+
+  path = 'http://localhost'
+  action = Bind::Actions::RefreshBrowsersHaml.new path, '..', 'Safari', 'Firefox'
+  listener = Bind::Listener.new :interval => 1, :debug => $stdout, :action => action, :files => Dir['*.haml'] + Dir['*.sass']
+  listener.run!
 
 == License:
 

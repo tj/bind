@@ -14,7 +14,7 @@ command :to do |c|
   c.syntax = 'bind to <file> [file ...] [options] '
   c.summary = 'Bind to modification of a file'
   c.description = 'Bind to modification of a file or all files within a directory.'
-  c.example 'Bind to a single file, logging its path when changed', "bind change style.css -e 'puts file'"
+  c.example 'Bind to a single file, logging its path when changed', "bind to style.css -e 'puts file'"
   c.option '-e', '--eval STRING', String, 'Evaluate a string of Ruby in context of Bind, so the file local variable is available.'
   c.when_called do |args, options|
     populate_common_options options
