@@ -19,7 +19,6 @@ command :to do |c|
   c.option '-r', '--require LIBS', 'Require ruby libraries.', Array
   c.option '-V', '--verbose', 'Log information to STDOUT.'
   c.when_called do |args, options|
-    # fix commander strings? ... --eval ' .... '
     options.require.each { |lib| require lib } if options.require
     options.log = $stdout if options.verbose
     options.action = lambda { |file| eval options.eval } if options.eval
