@@ -1,4 +1,8 @@
 
+=== 0.0.3 / 2009-03-03
+
+* Added action RefreshBrowsersHaml for haml / sass support
+
 === 0.0.1 / 2009-03-03
 
 * Initial release
