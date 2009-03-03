@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
+#require 'bind'
+require File.dirname(__FILE__) + '/../lib/bind'
 require 'commander'
-require 'bind'
 
 program :name, 'Bind'
 program :version, Bind::VERSION::STRING
@@ -13,10 +14,10 @@ command :to do |c|
   c.summary = 'Bind to modification of a file'
   c.description = 'Bind to modification of a file or all files within a directory.'
   c.example 'Bind to a single file, logging its path when changed', "bind change style.css -e 'puts file'"
-  c.option '-e', '--eval STRING', 'Evaluate a string of Ruby in context of Bind, so the file local variable is available.', String
-  c.option '-i', '--interval SECONDS', 'Interval in seconds in which to listen for an event.', Integer
-  c.option '-t', '--timeout SECONDS', 'Timeout after n seconds.', Integer
-  c.option '-r', '--require LIBS', 'Require ruby libraries.', Array
+  c.option '-e', '--eval STRING', String, 'Evaluate a string of Ruby in context of Bind, so the file local variable is available.'
+  c.option '-i', '--interval SECONDS', Integer, 'Interval in seconds in which to listen for an event.'
+  c.option '-t', '--timeout SECONDS', Integer, 'Timeout after n seconds.'
+  c.option '-r', '--require LIBS', Array, 'Require ruby libraries.'
   c.option '-V', '--verbose', 'Log information to STDOUT.'
   c.when_called do |args, options|
     options.require.each { |lib| require lib } if options.require
