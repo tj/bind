@@ -6,6 +6,7 @@ examples/refresh_browsers.rb
 examples/style.css
 History.rdoc
 lib/bind/actions/refresh_browsers.rb
+lib/bind/actions/refresh_browsers_haml.rb
 lib/bind/actions.rb
 lib/bind/command_helpers.rb
 lib/bind/listener.rb
@@ -19,5 +20,6 @@ spec/fixtures/style.css
 spec/spec_helper.rb
 tasks/docs.rake
 tasks/gemspec.rake
+tasks/release.rake
 tasks/spec.rake
 Todo.rdoc
