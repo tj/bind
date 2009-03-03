@@ -12,14 +12,14 @@ based on several events. Currently only the change (mtime) event
 is supported.
 
 Bind to a single file, outputting its path when changed
-  $ bind to style.css -e 'puts file.path'
+  $ rbind to style.css -e 'puts file.path'
 
 Refresh Safari, and Firefox in the background to the uri specified when 
 style.css or reset.css are modified.
-  $ bind refresh http://localhost/page --files style.css,reset.css --browsers Safari,Firefox
+  $ rbind refresh http://localhost/page --files style.css,reset.css --browsers Safari,Firefox
 
 Refresh local static html when the style you are working on is modified.
-  $ bind refresh examples/demo.html -f style.css -b Safari
+  $ rbind refresh examples/demo.html -f style.css -b Safari
 
 == Library
 

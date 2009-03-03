@@ -11,7 +11,7 @@ program :description, 'Bind actions to filesystem events'
 
 command :to do |c|
   set_common_options c
-  c.syntax = 'bind to <file> [file ...] [options] '
+  c.syntax = 'rbind to <file> [file ...] [options] '
   c.summary = 'Bind to modification of a file'
   c.description = 'Bind to modification of a file or all files within a directory.'
   c.example 'Bind to a single file, logging its path when changed', "bind to style.css -e 'puts file'"
@@ -30,7 +30,7 @@ end
 
 command :refresh do |c|
   set_common_options c
-  c.syntax = 'bind refresh <uri> [options]'
+  c.syntax = 'rbind refresh <uri> [options]'
   c.summary = 'Bind to <uri>, refreshing browsers.'
   c.description = 'Bind to <uri>, refreshing browsers when the files you are watching change.'
   c.example = 'Bind a few css files for quick editing in multiple browsers', 'bind refresh http://localhost/page --files style.css,reset.css --browsers Safari,Firefox'
