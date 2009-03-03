@@ -1,4 +1,8 @@
 
+=== 0.1.0 / 2009-03-03
+
+* Changed exec name bind to rbind to avoid collision
+
 === 0.0.9 / 2009-03-03
 	
 * Added RefreshBrowsersHaml example

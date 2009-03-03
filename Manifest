@@ -1,4 +1,4 @@
-bin/bind
+bin/rbind
 bind.gemspec
 examples/demo.html
 examples/log_changes.rb
