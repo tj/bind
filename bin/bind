@@ -21,7 +21,7 @@ command :to do |c|
   c.option '-V', '--verbose', 'Log information to STDOUT.'
   c.when_called do |args, options|
     options.require.each { |lib| require lib } if options.require
-    options.log = $stdout if options.verbose
+    options.debug = $stdout if options.verbose
     options.action = lambda { |file| eval options.eval } if options.eval
     options.files = args
     listener = Bind::Listener.new options_to_hash(options)

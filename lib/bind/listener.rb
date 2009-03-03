@@ -21,7 +21,7 @@ module Bind
    #   :action          an object responding to #call, which is used as the callback for the event handler
    #   :timeout         time in seconds, after which the listener should stop. Defaults to 0, meaning infinity
    #   :event           event to bind to, may be one of (:change). Defaults to :change
-   #   :log             log verbose debugging information to this stream
+   #   :debug           log verbose debugging information to this stream
    #   :interval        sleep interval in seconds. Defaults to 2
    #
     
@@ -33,7 +33,7 @@ module Bind
      @action = options.fetch :action do
        raise ArgumentError, 'pass a valid :action responding to #call'
      end
-     @log = options.fetch :log, false
+     @log = options.fetch :debug, false
      @timeout = options.fetch :timeout, 0
      @interval = options.fetch :interval, 2
      @event = options.fetch :event, :change
