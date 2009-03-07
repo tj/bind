@@ -12,7 +12,7 @@ program :description, 'Bind actions to filesystem events'
 command :to do |c|
   set_common_options c
   c.syntax = 'rbind to <file> [file ...] [options] '
-  c.summary = 'Bind to modification of a file'
+  c.summary = 'Bind to a file system event'
   c.description = 'Bind to modification of a file or all files within a directory.'
   c.example 'Bind to a single file, logging its path when changed', "bind to style.css -e 'puts file'"
   c.option '-e', '--eval STRING', String, 'Evaluate a string of Ruby in context of Bind, so the file local variable is available.'
