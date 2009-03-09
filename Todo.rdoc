@@ -2,6 +2,7 @@
 == Major:
 
 * Test refresh eval
+* Increase readability / Documentation
 * Better specs
 
 == Minor:
