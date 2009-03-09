@@ -2,6 +2,8 @@
 == Major:
 
 * Add sass / haml support in exec
+* Add autotest examples...
+* Recursive building of sass / haml
 
 == Minor:
 
