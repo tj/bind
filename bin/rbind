@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-require 'bind'
-require 'bind/command_helpers'
+require './lib/bind'
+require './lib/bind/command_helpers'
 require 'commander'
 
 program :name, 'Bind'

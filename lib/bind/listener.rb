@@ -49,7 +49,6 @@ module Bind
        when File.file?(path)      ; files.push path
        else                         files += Dir[path]
        end
-       files
      end    
    end
    
