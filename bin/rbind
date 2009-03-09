@@ -16,7 +16,7 @@ command :to do |c|
   c.description = 'Bind to modification of a file or files within a directory.'
   c.example 'Bind to a single file, logging its path when changed', "rbind to style.css -e 'puts file.path'"
   c.example 'Bind to a file, and a directory of files', "rbind to stylesheets style.css -e 'puts file.path'"
-  c.example 'Bind to a glob', "rbind to assets/*.css -e 'puts file.path'"
+  c.example 'Run specs when ruby files are modified', "rbind to lib/**/*.rb -e 'system \"rake spec\"'"
   c.option '-e', '--eval STRING', String, 'Evaluate a string of Ruby in context of Bind, so the file local variable is available.'
   c.when_called do |args, options|
     populate_common_options options
