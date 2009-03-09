@@ -12,6 +12,8 @@ def listener options
 end
 
 def common_options options
+  options.actions ||= []
+  options.actions << lambda { |file| eval options.eval } if options.eval
   options.require.each { |lib| require lib } if options.require
   options.debug = $stdout if options.verbose
 end

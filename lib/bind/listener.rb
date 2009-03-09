@@ -3,7 +3,7 @@
 module Bind
   class Listener
     
-   attr_accessor :paths, :action, :timeout, :interval, :event
+   attr_accessor :paths, :actions, :timeout, :interval, :event
    attr_reader :run_time, :start_time, :finish_time
   
    #--
@@ -18,7 +18,7 @@ module Bind
    # === Options:
    #
    #   :paths           array of file or directory paths
-   #   :action          an object responding to #call, which is used as the callback for the event handler
+   #   :actions         objects responding to #call, which is used as the callbacks for the event handler
    #   :timeout         time in seconds, after which the listener should stop. Defaults to 0, meaning infinity
    #   :event           event to bind to, may be one of (:change). Defaults to :change
    #   :debug           log verbose debugging information to this stream
@@ -30,8 +30,8 @@ module Bind
      @paths = options.fetch :paths do
       raise ArgumentError, 'specify one or more :paths (or directories) to bind the listener to'
      end
-     @action = options.fetch :action do
-       raise ArgumentError, 'pass a valid :action responding to #call'
+     @actions = options.fetch :actions do
+       raise ArgumentError, ':actions must be an array of objects responding to #call'
      end
      @log = options.fetch :debug, false
      @timeout = options.fetch :timeout, 0
@@ -46,7 +46,7 @@ module Bind
      paths.inject [] do |files, path|
        case
        when File.directory?(path) ; files += Dir["#{path}/**/*.*"]
-       when File.file?(path)      ; files.push path
+       when File.file?(path)      ; files << path
        else                         files += Dir[path]
        end
      end    
@@ -76,12 +76,19 @@ module Bind
    private
    
    ##
+   # Invoke all current actions with a +file+.
+   
+   def call_actions_with file
+     actions.each { |action| action.call file } 
+   end
+   
+   ##
    # Handle change event.
    
    def change file
      if changed? file
        log "changed #{file.path}"
-       action.call file
+       call_actions_with file
        @mtimes[file.path] = file.mtime
      end
    end

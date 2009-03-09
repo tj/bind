@@ -18,12 +18,8 @@ command :to do |c|
   c.example 'Bind to a file, and a directory of files', "rbind to stylesheets style.css -e 'puts file.path'"
   c.example 'Run specs when ruby files are modified', "rbind to lib/**/*.rb -e 'system \"rake spec\"'"
   c.when_called do |args, options|
+    abort 'invalid option. --eval switch is required in order to perform any action on the bound file(s)' unless options.eval
     common_options options
-    if options.eval
-      options.action = lambda { |file| eval options.eval }
-    else
-      abort 'invalid option. --eval switch is required in order to perform any action on the bound file(s)'
-    end
     options.paths = args
     listener(options).run!
   end
@@ -42,7 +38,7 @@ command :refresh do |c|
     common_options options
     uri = expand_path args.shift
     browsers = options.browsers || ['Safari']
-    options.action = Bind::Actions::RefreshBrowsers.new uri, *browsers 
+    options.actions << Bind::Actions::RefreshBrowsers.new(uri, *browsers)
     abort 'invalid option. --paths switch is required in order to bind' if options.paths.nil?
     listener(options).run!
   end

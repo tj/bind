@@ -1,12 +1,10 @@
 
 == Major:
 
-* Add sass / haml support in exec
-* Recursive building of sass / haml
+* Nothing
 
 == Minor:
 
-* Support action / event pairs, n to n, not 1 to 1
 * Add more actions / events like atime
 
 == Brainstorming:

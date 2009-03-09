@@ -2,7 +2,7 @@
 describe Bind::Listener do
   
   def listener *paths, &action
-    Bind::Listener.new :event => :change, :paths => paths, :interval => 1, :action => action, :timeout => 2
+    Bind::Listener.new :event => :change, :paths => paths, :interval => 1, :actions => [action], :timeout => 2
   end
   
   it "should expand directories" do
