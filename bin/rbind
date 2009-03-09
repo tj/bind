@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-require './lib/bind'
-require './lib/bind/command_helpers'
+require 'bind'
+require 'bind/command_helpers'
 require 'commander'
 
 program :name, 'Bind'
@@ -19,7 +19,7 @@ command :to do |c|
   c.example 'Run specs when ruby files are modified', "rbind to lib/**/*.rb -e 'system \"rake spec\"'"
   c.option '-e', '--eval STRING', String, 'Evaluate a string of Ruby in context of Bind, so the file local variable is available.'
   c.when_called do |args, options|
-    populate_common_options options
+    common_options options
     if options.eval
       options.action = lambda { |file| eval options.eval }
     else
@@ -34,17 +34,17 @@ command :refresh do |c|
   set_common_options c
   c.syntax = 'rbind refresh <uri> [options]'
   c.summary = 'Bind to <uri>, refreshing browsers.'
-  c.description = 'Bind to <uri>, refreshing browsers when the files you are watching change.'
+  c.description = 'Bind to <uri>, refreshing browsers when the paths you are watching change.'
   c.example = 'Bind a few css files for quick editing in multiple browsers', 'bind refresh http://localhost/page --files style.css,reset.css --browsers Safari,Firefox'
   c.example = 'Bind local static html (no scheme)', 'bind refresh examples/demo.html -f style.css -b Safari'
   c.option '-b', '--browsers BROWSERS', Array, 'List of browsers you wish to refresh. Defaults to Safari'
-  c.option '-f', '--files FILES', Array, 'List of files to bind to.'
+  c.option '-p', '--paths PATHS', Array, 'List of files, directories, or globs to bind to'
   c.when_called do |args, options|
-    populate_common_options options
-    path = expand_path args.shift
+    common_options options
+    uri = expand_path args.shift
     browsers = options.browsers || ['Safari']
-    options.action = Bind::Actions::RefreshBrowsers.new path, *browsers
-    abort 'invalid option. --files switch is required in order to bind' if options.paths.nil?
+    options.action = Bind::Actions::RefreshBrowsers.new uri, *browsers 
+    abort 'invalid option. --paths switch is required in order to bind' if options.paths.nil?
     listener(options).run!
   end
 end

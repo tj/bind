@@ -10,7 +10,7 @@ def listener options
   Bind::Listener.new options_to_hash(options)
 end
 
-def populate_common_options options
+def common_options options
   options.require.each { |lib| require lib } if options.require
   options.debug = $stdout if options.verbose
 end
