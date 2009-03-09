@@ -46,8 +46,10 @@ module Bind
      paths.inject [] do |files, path|
        if File.directory? path
          files += Dir["#{path}/**/*.*"]
-       else
+       elsif File.file? path
          files.push path
+       else
+         files += Dir[path]
        end
        files
      end    
