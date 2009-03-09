@@ -1,4 +1,16 @@
 
+=== 0.2.0 / 2009-03-09
+
+* Added gitignore
+* Added support for multiple actions
+* Added example for multiple actions
+* Added --eval to common options
+* Added spec runner / globbing example
+* Added #expand_dirs
+* Changed devel dependency visionmedia-commander >=2.5.6
+* Changed option :files to :paths
+* Removed RefreshBrowsersHaml, getting to specific to be helpful
+
 === 0.1.0 / 2009-03-03
 
 * Changed exec name bind to rbind to avoid collision

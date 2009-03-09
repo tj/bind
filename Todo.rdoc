@@ -1,6 +1,7 @@
 
 == Major:
 
+* Test refresh eval
 * Better specs
 
 == Minor:
