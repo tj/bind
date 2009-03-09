@@ -14,14 +14,14 @@ command :to do |c|
   c.syntax = 'rbind to <path> [path ...] [options] '
   c.summary = 'Bind to a file system event'
   c.description = 'Bind to modification of a file or files within a directory.'
-  c.example 'Bind to a single file, logging its path when changed', "bind to style.css -e 'puts file'"
-  c.example 'Bind to a file, and a directory of files', "bind to stylesheets style.css -e 'puts file'"
-  c.example 'Bind to a glob', "bind to assets/*.css -e 'puts file'"
+  c.example 'Bind to a single file, logging its path when changed', "rbind to style.css -e 'puts file.path'"
+  c.example 'Bind to a file, and a directory of files', "rbind to stylesheets style.css -e 'puts file.path'"
+  c.example 'Bind to a glob', "rbind to assets/*.css -e 'puts file.path'"
   c.option '-e', '--eval STRING', String, 'Evaluate a string of Ruby in context of Bind, so the file local variable is available.'
   c.when_called do |args, options|
     populate_common_options options
     if options.eval
-      options.action = lambda { eval options.eval }
+      options.action = lambda { |file| eval options.eval }
     else
       abort 'invalid option. --eval switch is required in order to perform any action on the bound file(s)'
     end

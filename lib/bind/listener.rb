@@ -57,16 +57,16 @@ module Bind
    # Start the listener.
    
    def run!
-     paths = expand_dirs @paths
+     files = expand_dirs @paths
      start_time = Time.now
-     log "binding to #{paths.join(', ')}, watching #{event} every #{interval} second(s)." + 
+     log "binding to #{files.join(', ')}, watching #{event} every #{interval} second(s)." + 
          (timeout > 0 ? " Terminating in #{timeout} seconds" : '')
      catch :halt do
        loop do
          @run_time = Time.now - start_time
          throw :halt if timeout > 0 and @run_time >= timeout
          log '.', true
-         paths.each { |file| send event, File.new(file) } 
+         files.each { |file| send event, File.new(file) } 
          sleep interval
        end
      end
