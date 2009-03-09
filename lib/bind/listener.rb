@@ -79,6 +79,7 @@ module Bind
    # Invoke all current actions with a +file+.
    
    def call_actions_with file
+     p actions
      actions.each { |action| action.call file } 
    end
    
