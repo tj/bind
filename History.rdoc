@@ -1,4 +1,8 @@
 
+=== 0.2.1 / 2009-03-09
+
+* Removed a #p call
+
 === 0.2.0 / 2009-03-09
 
 * Added gitignore
