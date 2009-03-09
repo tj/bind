@@ -3,7 +3,7 @@
 module Bind
   class Listener
     
-   attr_accessor :files, :action, :timeout, :interval, :event
+   attr_accessor :paths, :action, :timeout, :interval, :event
    attr_reader :run_time, :start_time, :finish_time
   
    #--
@@ -13,11 +13,11 @@ module Bind
    class Error < StandardError; end
   
    ##
-   # Event listener. Must specify the :files, and :action options.
+   # Event listener. Must specify the :paths, and :action options.
    #
    # === Options:
    #
-   #   :files           array of files and / or directories
+   #   :paths           array of file or directory paths
    #   :action          an object responding to #call, which is used as the callback for the event handler
    #   :timeout         time in seconds, after which the listener should stop. Defaults to 0, meaning infinity
    #   :event           event to bind to, may be one of (:change). Defaults to :change
@@ -27,8 +27,8 @@ module Bind
     
    def initialize options = {}
      @run_time, @mtimes = 0, {}
-     @files = options.fetch :files do
-      raise ArgumentError, 'specify one or more :files (or directories) to bind the listener to'
+     @paths = options.fetch :paths do
+      raise ArgumentError, 'specify one or more :paths (or directories) to bind the listener to'
      end
      @action = options.fetch :action do
        raise ArgumentError, 'pass a valid :action responding to #call'
@@ -38,20 +38,28 @@ module Bind
      @interval = options.fetch :interval, 2
      @event = options.fetch :event, :change
    end
+
+   ##
+   # Expand directories into file paths.
+   
+   def expand_dirs paths
+     paths    
+   end
    
    ##
    # Start the listener.
    
    def run!
+     paths = expand_dirs @paths
      start_time = Time.now
-     log "binding to #{files.join(', ')}, watching #{event} every #{interval} second(s)." + 
+     log "binding to #{paths.join(', ')}, watching #{event} every #{interval} second(s)." + 
          (timeout > 0 ? " Terminating in #{timeout} seconds" : '')
      catch :halt do
        loop do
          @run_time = Time.now - start_time
          throw :halt if timeout > 0 and @run_time >= timeout
          log '.', true
-         files.each { |file| send event, File.new(file) } 
+         paths.each { |file| send event, File.new(file) } 
          sleep interval
        end
      end

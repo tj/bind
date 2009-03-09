@@ -32,7 +32,7 @@ sass file is modified, it will be compiled to '..' (up a directory) preceding th
 
   path = 'http://localhost'
   action = Bind::Actions::RefreshBrowsersHaml.new path, '..', 'Safari', 'Firefox'
-  listener = Bind::Listener.new :interval => 1, :debug => $stdout, :action => action, :files => Dir['*.haml'] + Dir['*.sass']
+  listener = Bind::Listener.new :interval => 1, :debug => $stdout, :action => action, :paths => Dir['*.haml'] + Dir['*.sass']
   listener.run!
 
 == License:

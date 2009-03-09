@@ -2,7 +2,7 @@
 describe Bind::Listener do
   
   def listener &action
-    Bind::Listener.new :event => :change, :files => [File.dirname(__FILE__) + '/fixtures/style.css'], :interval => 1, :action => action, :timeout => 2
+    Bind::Listener.new :event => :change, :paths => [File.dirname(__FILE__) + '/fixtures/style.css'], :interval => 1, :action => action, :timeout => 2
   end
   
   it "should record total runtime" do

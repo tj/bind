@@ -11,9 +11,9 @@ program :description, 'Bind actions to filesystem events'
 
 command :to do |c|
   set_common_options c
-  c.syntax = 'rbind to <file> [file ...] [options] '
+  c.syntax = 'rbind to <path> [path ...] [options] '
   c.summary = 'Bind to a file system event'
-  c.description = 'Bind to modification of a file or all files within a directory.'
+  c.description = 'Bind to modification of a file or files within a directory.'
   c.example 'Bind to a single file, logging its path when changed', "bind to style.css -e 'puts file'"
   c.option '-e', '--eval STRING', String, 'Evaluate a string of Ruby in context of Bind, so the file local variable is available.'
   c.when_called do |args, options|
@@ -23,7 +23,7 @@ command :to do |c|
     else
       abort 'invalid option. --eval switch is required in order to perform any action on the bound file(s)'
     end
-    options.files = args
+    options.paths = args
     listener(options).run!
   end
 end
@@ -42,7 +42,7 @@ command :refresh do |c|
     path = expand_path args.shift
     browsers = options.browsers || ['Safari']
     options.action = Bind::Actions::RefreshBrowsers.new path, *browsers
-    abort 'invalid option. --files switch is required in order to bind' if options.files.nil?
+    abort 'invalid option. --files switch is required in order to bind' if options.paths.nil?
     listener(options).run!
   end
 end
