@@ -45,9 +45,7 @@ module Bind
    def expand_dirs paths
      paths.inject [] do |files, path|
        if File.directory? path
-         Dir["#{path}/*"].each do |path|
-           files += expand_dirs(path)
-         end
+         files += Dir["#{path}/**/*.*"]
        else
          files.push path
        end
