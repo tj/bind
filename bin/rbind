@@ -19,7 +19,7 @@ command :to do |c|
   c.when_called do |args, options|
     populate_common_options options
     if options.eval
-      options.action = lambda { |file| eval options.eval }
+      options.action = lambda { eval options.eval }
     else
       abort 'invalid option. --eval switch is required in order to perform any action on the bound file(s)'
     end
