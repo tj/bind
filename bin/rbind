@@ -5,8 +5,8 @@ require 'bind'
 require 'bind/command_helpers'
 require 'commander'
 
-program :name, 'Bind'
-program :version, Bind::VERSION::STRING
+program :name, 'rbind'
+program :version, Bind::VERSION
 program :description, 'Bind actions to filesystem events'
 
 command :to do |c|
@@ -30,8 +30,8 @@ command :refresh do |c|
   c.syntax = 'rbind refresh <uri> [options]'
   c.summary = 'Bind to <uri>, refreshing browsers.'
   c.description = 'Bind to <uri>, refreshing browsers when the paths you are watching change.'
-  c.example = 'Bind a few css files for quick editing in multiple browsers', 'bind refresh http://localhost/page --files style.css,reset.css --browsers Safari,Firefox'
-  c.example = 'Bind local static html (no scheme)', 'bind refresh examples/demo.html -f style.css -b Safari'
+  c.example 'Bind a few css files for quick editing in multiple browsers', 'bind refresh http://localhost/page --files style.css,reset.css --browsers Safari,Firefox'
+  c.example 'Bind local static html (no scheme)', 'bind refresh examples/demo.html -f style.css -b Safari'
   c.option '-b', '--browsers BROWSERS', Array, 'List of browsers you wish to refresh. Defaults to Safari'
   c.option '-p', '--paths PATHS', Array, 'List of files, directories, or globs to bind to'
   c.when_called do |args, options|
