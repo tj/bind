@@ -1,7 +1,8 @@
 
 == Major:
 
-* Autotest-like functionality for specs / refactoring
+* Allow --paths to have globs ... and dirs test this
+* Autotest-like functionality for specs / refactoring 
 * Test refresh eval
 * Increase readability / Documentation
 * Better specs
