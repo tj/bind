@@ -1,6 +1,7 @@
 
 == Major:
 
+* Autotest-like functionality for specs / refactoring
 * Test refresh eval
 * Increase readability / Documentation
 * Better specs
