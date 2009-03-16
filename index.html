@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Bind - The automation machine</title>
+    <link href='style.css' rel='stylesheet' />
+  </head>
+  <body>
+    <a href='http://github.com/visionmedia/bind'>
+      <img alt='Fork me on GitHub' id='ribbon' src='http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png' />
+    </a>
+  </body>
+  <div id='container'>
+    <div id='download'>
+      <a href='http://github.com/visionmedia/bind/downloads'>
+        <img src='http://github.com/images/modules/download/zip.png' />
+      </a>
+      <a href='http://github.com/visionmedia/bind/downloads'>
+        <img src='http://github.com/images/modules/download/tar.png' />
+      </a>
+    </div>
+    <h1>Bind <em>The automation machine</em></h1>
+    <p>
+      Bind actions to various file system events, helping aid in automation of tasks such as refreshing browser(s) when you update a css / sass / js file, running test suites, compiling source, and well, anything you can think of!
+    </p>
+    <h2>Executable</h2>
+    <p>The rbind executale allows you to perform arbitrary actions based on system events. Currently only the change (mtime) event is supported.</p>
+    <p>The file variable is an instance of File, so you may do anything you can imagine with it. Below are some prefabricated solutions:</p>
+    <pre>$ rbind to style.css -e 'puts file.path'</pre>
+    <p>Refresh a uri or local file when style related files are changed</p>
+    <pre>$ rbind refresh http://localhost/page --paths *.css --browsers Safari,Firefox</pre>
+    <h2>Library</h2>
+    <p>TODO</p>
+    <div class='footer'>
+      this mini site brought to you by :
+      <a href='http://github.com/visionmedia/mini'>visionmedia/mini</a>
+    </div>
+  </div>
+</html>

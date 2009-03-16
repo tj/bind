@@ -1,0 +1,38 @@
+!!!
+%html
+  %head
+    %title Bind - The automation machine
+    %link{ :rel => 'stylesheet', :href => 'style.css' }
+  %body
+    %a{ :href => PROJECT_URL }
+      %img#ribbon{ :src => 'http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png', :alt => 'Fork me on GitHub' }
+ 
+  #container
+    #download
+      %a{ :href => PROJECT_URL + '/downloads' }
+        %img{ :src => 'http://github.com/images/modules/download/zip.png' }
+      %a{ :href => PROJECT_URL + '/downloads' }
+        %img{ :src => 'http://github.com/images/modules/download/tar.png' }
+
+    = title 'Bind', 'The automation machine'
+ 
+    %p
+      Bind actions to various file system events, helping aid in automation of tasks such as refreshing browser(s) when you update a css / sass / js file, running test suites, compiling source, and well, anything you can think of!
+
+    %h2 Executable
+
+    %p The rbind executale allows you to perform arbitrary actions based on system events. Currently only the change (mtime) event is supported.
+
+    %p The file variable is an instance of File, so you may do anything you can imagine with it. Below are some prefabricated solutions:
+    %pre $ rbind to style.css -e 'puts file.path'
+
+    %p Refresh a uri or local file when style related files are changed
+    %pre $ rbind refresh http://localhost/page --paths *.css --browsers Safari,Firefox
+
+    %h2 Library
+
+    %p TODO
+ 
+    .footer
+      this mini site brought to you by : 
+      %a{ :href => project_url('visionmedia', 'mini') } visionmedia/mini
