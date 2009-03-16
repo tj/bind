@@ -26,6 +26,9 @@
     %p The file variable is an instance of File, so you may do anything you can imagine with it. Below are some prefabricated solutions:
     %pre $ rbind to style.css -e 'puts file.path'
 
+    %p Below is an arbitrary example from my 'torque' gem which uses a Ragel scanner requiring compilation
+    %pre $ rbind to lib/**/*.rb ext/*.rl spec/**/*.rb --verbose --eval 'system "clear && rake ext:build && rake spec"'
+
     %p Refresh a uri or local file when style related files are changed
     %pre $ rbind refresh http://localhost/page --paths *.css --browsers Safari,Firefox
 

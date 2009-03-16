@@ -26,6 +26,8 @@
     <p>The rbind executale allows you to perform arbitrary actions based on system events. Currently only the change (mtime) event is supported.</p>
     <p>The file variable is an instance of File, so you may do anything you can imagine with it. Below are some prefabricated solutions:</p>
     <pre>$ rbind to style.css -e 'puts file.path'</pre>
+    <p>Below is an arbitrary example from my 'torque' gem which uses a Ragel scanner requiring compilation</p>
+    <pre>$ rbind to lib/**/*.rb ext/*.rl spec/**/*.rb --verbose --eval 'system "clear && rake ext:build && rake spec"'</pre>
     <p>Refresh a uri or local file when style related files are changed</p>
     <pre>$ rbind refresh http://localhost/page --paths *.css --browsers Safari,Firefox</pre>
     <h2>Library</h2>
