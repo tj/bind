@@ -1,10 +1,11 @@
 
+$:.unshift 'lib'
+require 'bind'
 require 'rubygems'
 require 'rake'
 require 'echoe'
-require './lib/bind.rb'
 
-Echoe.new("bind", Bind::VERSION) do |p|
+Echoe.new "bind", Bind::VERSION do |p|
   p.author = "TJ Holowaychuk"
   p.email = "tj@vision-media.ca"
   p.summary = "bind actions to filesystem events"
