@@ -1,6 +1,7 @@
 
 == Major:
 
+* Are the globs working properly ?... recursing?
 * Allow --paths to have globs ... and dirs test this
 * Autotest-like functionality for specs / refactoring 
 * Test refresh eval
