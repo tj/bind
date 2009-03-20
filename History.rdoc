@@ -1,4 +1,10 @@
 
+=== 0.2.3 / 2009-03-20
+
+* Added more specs for listener
+* Added specs for command helpers
+* Removed loadpath unshift
+
 === 0.2.2 / 2009-03-13
 
 * Updated dependency visionmedia-commander >= 3.1.1
