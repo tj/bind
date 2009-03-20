@@ -39,7 +39,7 @@ module Bind
    end
 
    ##
-   # Expand directories into file paths.
+   # Expand directories into file paths, returns array.
    
    def expand_dirs paths
      paths.inject [] do |files, path|

@@ -17,6 +17,11 @@ describe Bind::Listener do
     l.expand_dirs(fixture_path('assets')).should == files
   end
   
+  it "should expand paths to a single file" do
+    l = listener {}
+    l.expand_dirs(fixture_path('style.css')).should == ['./spec/fixtures/style.css']
+  end
+  
   it "should expand directories using globbing" do
     files = %w(
       ./spec/fixtures/assets/jquery.js
