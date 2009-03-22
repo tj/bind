@@ -8,7 +8,7 @@ def set_common_options c
 end
 
 def listener options
-  Bind::Listener.new options_to_hash(options)
+  Bind::Listener.new options.__hash__
 end
 
 def common_options options
@@ -20,11 +20,4 @@ end
 
 def expand_path path
   path.include?('://') ? path : File.expand_path(path)
-end
-
-def options_to_hash options
-  options.__singleton_methods__.inject({}) do |hash, meth| 
-    hash[meth.to_sym] = options.send meth unless meth =~ /=$/
-    hash
-  end
 end

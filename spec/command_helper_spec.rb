@@ -15,13 +15,5 @@ describe Bind do
       end
     end
     
-    describe "#options_to_hash" do
-      it "should transform an options struct into a hash" do
-        options = OpenStruct.new
-        options.foo = 'bar'
-        options_to_hash(options)[:foo].should == 'bar'
-      end
-    end
-    
   end
 end
