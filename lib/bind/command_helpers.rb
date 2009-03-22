@@ -23,7 +23,7 @@ def expand_path path
 end
 
 def options_to_hash options
-  options.singleton_methods.inject({}) do |hash, meth| 
+  options.__singleton_methods__.inject({}) do |hash, meth| 
     hash[meth.to_sym] = options.send meth unless meth =~ /=$/
     hash
   end
