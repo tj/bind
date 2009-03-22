@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-require File.dirname(__FILE__) + '/../lib/bind'
-require File.dirname(__FILE__) + '/../lib/bind/command_helpers'
+require 'bind'
+require 'bind/command_helpers'
 require 'commander'
 
 program :name, 'rbind'
