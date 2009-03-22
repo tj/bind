@@ -1,4 +1,8 @@
 
+=== 0.2.5 / 2009-03-22
+
+* visionmedia-commander >=3.1.6 for options hash symbols
+
 === 0.2.4 / 2009-03-22
 
 * Removed options_to_hash, using Options#__hash__ now
