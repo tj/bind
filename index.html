@@ -24,14 +24,18 @@
     </p>
     <h2>Executable</h2>
     <p>The rbind executale allows you to perform arbitrary actions based on system events. Currently only the change (mtime) event is supported.</p>
+    <p>Bind to glob</p>
+    <pre>$ rbind to stylesheets/*.css -e 'puts file.path'</pre>
+    <p>Bind to ruby glob (allows recursion) note the quotes</p>
+    <pre>$ rbind to 'stylesheets/**/*.css' -e 'puts file.path'</pre>
     <p>The file variable is an instance of File, so you may do anything you can imagine with it. Below are some prefabricated solutions:</p>
     <pre>$ rbind to style.css -e 'puts file.path'</pre>
     <p>Below is an arbitrary example from my 'torque' gem which uses a Ragel scanner requiring compilation</p>
-    <pre>$ rbind to lib/**/*.rb ext/*.rl spec/**/*.rb --verbose --eval 'system "clear && rake ext:build && rake spec"'</pre>
+    <pre>$ rbind to 'lib/**/*.rb' 'ext/*.rl' 'spec/**/*.rb' --verbose --eval 'system "clear && rake ext:build && rake spec"'</pre>
     <p>Refresh a uri or local file when style related files are changed</p>
     <pre>$ rbind refresh http://localhost/page --paths *.css --browsers Safari,Firefox</pre>
     <h2>Library</h2>
-    <p>TODO</p>
+    <p>The bind library provides all the functionality above and more, allowing you to create your own custom actions to solve any automation issue such as building / compiling Sass and Haml as you work on the source.</p>
     <div class='footer'>
       this mini site brought to you by :
       <a href='http://github.com/visionmedia/mini'>visionmedia/mini</a>
