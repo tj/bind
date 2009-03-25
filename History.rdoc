@@ -1,4 +1,8 @@
 
+=== 0.2.6 / 2009-03-25
+
+* Updated exec doc to match recent changes
+
 === 0.2.5 / 2009-03-22
 
 * visionmedia-commander >=3.1.6 for options hash symbols

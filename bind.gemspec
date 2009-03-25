@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{bind}
-  s.version = "0.2.5"
+  s.version = "0.2.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["TJ Holowaychuk"]
-  s.date = %q{2009-03-22}
+  s.date = %q{2009-03-25}
   s.default_executable = %q{rbind}
   s.description = %q{bind actions to filesystem events}
   s.email = %q{tj@vision-media.ca}
