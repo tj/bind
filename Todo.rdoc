@@ -1,6 +1,7 @@
 
 == Major:
 
+* Native JSpec support
 * Allow --paths to have globs ... and dirs test this
 * Autotest-like functionality for specs / refactoring 
   * rbind rake ext:build spec --paths foo,foobar,w/e
