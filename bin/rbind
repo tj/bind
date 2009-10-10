@@ -3,7 +3,7 @@
 require 'rubygems'
 require 'bind'
 require 'bind/command_helpers'
-require 'commander'
+require 'commander/import'
 
 program :name, 'rbind'
 program :version, Bind::VERSION
@@ -17,7 +17,7 @@ command :to do |c|
   c.example 'Bind to a single file, logging its path when changed', "rbind to style.css -e 'puts file.path'"
   c.example 'Bind to a file, and a directory of files', "rbind to stylesheets style.css -e 'puts file.path'"
   c.example 'Run specs when ruby files are modified', "rbind to 'lib/**/*.rb' -e 'system \"rake spec\"'"
-  c.when_called do |args, options|
+  c.action do |args, options|
     abort 'invalid option. --eval switch is required in order to perform any action on the bound file(s)' unless options.eval
     common_options options
     options.paths = args
@@ -34,7 +34,7 @@ command :refresh do |c|
   c.example 'Bind local static html (no scheme)', 'bind refresh examples/demo.html -f style.css -b Safari'
   c.option '-b', '--browsers BROWSERS', Array, 'List of browsers you wish to refresh. Defaults to Safari'
   c.option '-p', '--paths PATHS', Array, 'List of files, directories, or globs to bind to'
-  c.when_called do |args, options|
+  c.action do |args, options|
     common_options options
     uri = expand_path args.shift
     browsers = options.browsers || ['Safari']
