@@ -5,6 +5,11 @@ Bind actions to various file system events, helping aid in
 automation of tasks such as refreshing browser(s) when you
 update a css / sass / js file.
 
+== Installation
+
+  Install [Gemcutter](http://gemcutter.org) and execute:
+  $ sudo gem install bind
+
 == Executable
 
 The 'bind' executable allows you to perform arbitrary actions
