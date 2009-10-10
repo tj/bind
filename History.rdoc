@@ -1,4 +1,8 @@
 
+=== 0.2.7 / 2009-10-10
+
+* Removed gem namespace (thanks github...)
+
 === 0.2.6 / 2009-03-25
 
 * Updated exec doc to match recent changes

@@ -1,3 +1,8 @@
+History.rdoc
+Manifest
+README.rdoc
+Rakefile
+Todo.rdoc
 bin/rbind
 bind.gemspec
 examples/demo.html
@@ -5,16 +10,12 @@ examples/globbing.rb
 examples/log_changes.rb
 examples/refresh_browsers.rb
 examples/style.css
-History.rdoc
-lib/bind/actions/refresh_browsers.rb
+lib/bind.rb
 lib/bind/actions.rb
+lib/bind/actions/refresh_browsers.rb
 lib/bind/command_helpers.rb
 lib/bind/listener.rb
 lib/bind/version.rb
-lib/bind.rb
-Manifest
-Rakefile
-README.rdoc
 spec/command_helper_spec.rb
 spec/fixtures/assets/bar.css
 spec/fixtures/assets/foo.css
@@ -28,4 +29,3 @@ tasks/docs.rake
 tasks/gemspec.rake
 tasks/release.rake
 tasks/spec.rake
-Todo.rdoc
