@@ -16,15 +16,6 @@ lib/bind/actions/refresh_browsers.rb
 lib/bind/command_helpers.rb
 lib/bind/listener.rb
 lib/bind/version.rb
-spec/command_helper_spec.rb
-spec/fixtures/assets/bar.css
-spec/fixtures/assets/foo.css
-spec/fixtures/assets/jquery.js
-spec/fixtures/assets/js/app.js
-spec/fixtures/assets/js/test.js
-spec/fixtures/style.css
-spec/listener_spec.rb
-spec/spec_helper.rb
 tasks/docs.rake
 tasks/gemspec.rake
 tasks/release.rake

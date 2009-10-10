@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{bind}
-  s.version = "0.2.7"
+  s.version = "0.2.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["TJ Holowaychuk"]
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.email = %q{tj@vision-media.ca}
   s.executables = ["rbind"]
   s.extra_rdoc_files = ["README.rdoc", "bin/rbind", "bind.gemspec", "lib/bind.rb", "lib/bind/actions.rb", "lib/bind/actions/refresh_browsers.rb", "lib/bind/command_helpers.rb", "lib/bind/listener.rb", "lib/bind/version.rb", "tasks/docs.rake", "tasks/gemspec.rake", "tasks/release.rake", "tasks/spec.rake"]
-  s.files = ["History.rdoc", "Manifest", "README.rdoc", "Rakefile", "Todo.rdoc", "bin/rbind", "bind.gemspec", "examples/demo.html", "examples/globbing.rb", "examples/log_changes.rb", "examples/refresh_browsers.rb", "examples/style.css", "lib/bind.rb", "lib/bind/actions.rb", "lib/bind/actions/refresh_browsers.rb", "lib/bind/command_helpers.rb", "lib/bind/listener.rb", "lib/bind/version.rb", "spec/command_helper_spec.rb", "spec/fixtures/assets/bar.css", "spec/fixtures/assets/foo.css", "spec/fixtures/assets/jquery.js", "spec/fixtures/assets/js/app.js", "spec/fixtures/assets/js/test.js", "spec/fixtures/style.css", "spec/listener_spec.rb", "spec/spec_helper.rb", "tasks/docs.rake", "tasks/gemspec.rake", "tasks/release.rake", "tasks/spec.rake"]
+  s.files = ["History.rdoc", "Manifest", "README.rdoc", "Rakefile", "Todo.rdoc", "bin/rbind", "bind.gemspec", "examples/demo.html", "examples/globbing.rb", "examples/log_changes.rb", "examples/refresh_browsers.rb", "examples/style.css", "lib/bind.rb", "lib/bind/actions.rb", "lib/bind/actions/refresh_browsers.rb", "lib/bind/command_helpers.rb", "lib/bind/listener.rb", "lib/bind/version.rb", "tasks/docs.rake", "tasks/gemspec.rake", "tasks/release.rake", "tasks/spec.rake"]
   s.homepage = %q{http://github.com/visionmedia/bind}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Bind", "--main", "README.rdoc"]
   s.require_paths = ["lib"]
